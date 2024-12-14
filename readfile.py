@@ -5,12 +5,12 @@ def convert_to_seconds(time_str):
 
 
 # Initialize an empty dictionary to store the data
-file_data = {}
+
 
 # Open the file
 def readfile(folderdir):
+    file_data = {}
     target_path = os.path.abspath(folderdir)
-    print(target_path)
     with open(target_path, 'r') as file:
         num_entries = int(file.readline().strip())
 
@@ -24,8 +24,9 @@ def readfile(folderdir):
             value = convert_to_seconds(time_str)
 
             file_data[key] = value
+    return file_data
 
 
 
-readfile(r"..\testcases\Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
-print(file_data)
+#readfile(r"Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
+#print(file_data)
