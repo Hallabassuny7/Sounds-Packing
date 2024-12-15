@@ -1,4 +1,4 @@
-import complete_scenario
+import FileHandling
 
 
     
@@ -49,13 +49,13 @@ if __name__ == "__main__":
     # Determine which test case to execute
     if complete_scenario.workingOn_testcase == 1:
         source = r"./Sample Tests/Sample 1/INPUT/Audios"
-        packed_folders = multi_pass_pack(complete_scenario.t1, folder_capacity)
+        packed_folders = multi_pass_pack(FileHandling.t1, folder_capacity)
     elif complete_scenario.workingOn_testcase == 2:
         source = r"./Sample Tests/Sample 2/INPUT/Audios"
-        packed_folders = multi_pass_pack(complete_scenario.t2, folder_capacity)
+        packed_folders = multi_pass_pack(FileHandling.t2, folder_capacity)
     else:
         source = r"./Sample Tests/Sample 3/INPUT/Audios"
-        packed_folders = multi_pass_pack(complete_scenario.t3, folder_capacity)
+        packed_folders = multi_pass_pack(FileHandling.t3, folder_capacity)
 
     # Print the results
     for i, folder in enumerate(packed_folders):
