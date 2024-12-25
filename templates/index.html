@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Test and Algorithm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 40px;
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #5c67f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #4a54e1;
+        }
+        .error {
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Please select a sample test and an algorithm</h1>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form action="/" method="post">
+        <label for="test_choice">Choose a sample test:</label>
+        <select name="test_choice" id="test_choice">
+            <option value="">Select a test</option>
+            <option value="1">Sample Test 1</option>
+            <option value="2">Sample Test 2</option>
+            <option value="3">Sample Test 3</option>
+        </select>
+        <label for="algorithm_choice">Choose an algorithm:</label>
+        <select name="algorithm_choice" id="algorithm_choice">
+            <option value="">Select an algorithm</option>
+            <option value="A">Algorithm A</option>
+            <option value="B">Algorithm B</option>
+            <option value="C">Algorithm C</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
