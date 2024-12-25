@@ -1,3 +1,5 @@
+from FileHandling import sortduration
+
 def FirstFit(tracks, DDPF):
     # Sorting the tracks by duration in descending order using Timsort
     sortedtracks = sortduration(tracks)                                                             # O(N log N), Timsort complexity for sorting dictionary items,where N is the number of items in `tracks`
