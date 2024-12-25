@@ -1,4 +1,3 @@
-
 import heapq  
 def next_fit_D_C(file_sizes, folder_capacity):  # Main function to allocate files into folders.
     # Convert file_sizes dictionary into a list of tuples (filename, size)
