@@ -80,13 +80,10 @@ class FileHandlingClass:
             with open(os.path.join(outputdir, f"F{it}_METADATA.txt"), "w") as file:
                 file.write(f"F{it}\n")
             # //////////////////////////////////////////////////////////////////////////////
-            # Display
-            print(f"F{it}:")
             timesum = 0
             for j in i:
                 sourcefile = os.path.join(os.path.abspath(src), j[0])
                 destfile = os.path.join(currentfolder, j[0])
-                print(f"\t{j[0]}")
                 # txt file
                 # convert sec to time format
                 time = FileHandlingClass.seconds_to_hms(j[1])
@@ -118,5 +115,11 @@ class FileHandlingClass:
             with open(os.path.join(outputdir, f"F{it}_METADATA.txt"), "a") as file:
                 file.write(f"{FileHandlingClass.seconds_to_hms(timesum)}\n")
             # //////////////////////////////////////////////////////////////////////////////
+            with open(os.path.join(outputdir, f"F{it}_METADATA.txt"), "r") as file:
+                # Read the file's content
+                content = file.read()
+                # Print the file's content
+                print(content)
+            print(f"Number of folders: {it}")
             it += 1
 

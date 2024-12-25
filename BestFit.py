@@ -33,7 +33,7 @@ def best_fit_with_priority_queue(file_sizes, folder_capacity):                  
             heapq.heapify(folders)                                                 #O(k) "where k is the number of folders in the heap (having remaining capacity)"
             #Rebuilding the heap to restore the heap property after modifying the folder list.
 
-    return folders                                                                 #O(1)
+    return [folders for _, folders in folders]
 
 
 
@@ -60,9 +60,6 @@ file_sizes = {
 folder_capacity = 30
 result = best_fit_with_priority_queue(file_sizes, folder_capacity)
 
-# Output the result
-for idx, (used_capacity, folder_content) in enumerate(result):
-    print(f"Folder {idx + 1}: Used Capacity = {used_capacity}, Files = {folder_content}")
 
 #############################################################################################################
 #############################################################################################################
@@ -110,7 +107,7 @@ def best_fit_dp(file_sizes, folder_capacity):                  # Total time comp
             print("Warning: No more files can be allocated to a folder. Exiting.")
             break                               # O(1) - Exit if no files can be allocated
 
-        folders.append((folder_capacity - cap, folder))  
+        folders.append(folder)  
                                                 # O(1) - Add folder to result
 
         # Remove the allocated files from the remaining files set
@@ -138,8 +135,5 @@ file_sizes = {
     "file6": 10
 }
 folder_capacity = 30
-result = best_fit_dp(file_sizes, folder_capacity)
-
-# Output the result
-for idx, (used_capacity, folder_content) in enumerate(result):
-     print(f"Folder {idx + 1}: Used Capacity = {used_capacity}, Files = {folder_content}")
+result = best_fit_with_priority_queue(file_sizes, folder_capacity)
+print(result)

@@ -6,6 +6,10 @@ from HarmonicPartitioning import Harmonic_Partitioning
 from FileHandling import *
 from FolderFilling import *
 from fractionalPacking import *
+from pack import *
+from BestFit import *
+from NextFit import *
+from FirstFit import *
 
 app = Flask(__name__)
 filehandler = FileHandlingClass()
@@ -18,28 +22,34 @@ algorithms = {
     'Worst Fit Priority Queue Decreasing':WorstFit_PriorityQueue_Decreasing,
     'Harmonic Partitioning':Harmonic_Partitioning,
     'Folder Filling':folder_filling,
-    'Fractional Packing':fractional_packing
+    'Fractional Packing':fractional_packing,
+    'Pack':pack,
+    'Best Fit Dynamic Programming':best_fit_dp,
+    'Best Fit Priority Queue Decreasing':best_fit_with_priority_queue,
+    'Next Fit Divide & Conquer':next_fit_D_C,
+    'Next Fit Greedy':next_fit_greedy,
+    'First Fit Linear Search Decreasing':FirstFit
 }
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         test_choice = request.form.get('test_choice')
-        files = filehandler.readfile(r"Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
         algorithm_choice = request.form.get('algorithm_choice')
         folder_capacity = request.form.get('folder_capacity', type=int)
-
+        folder_location=rf"Sample Tests\{test_choice}\Audios"
+        files = filehandler.readfile(rf"{folder_location}Info.txt")
+        output_location=rf"Sample Tests"
         if not test_choice or not algorithm_choice or folder_capacity is None:
             return render_template('index.html', error="Please make sure to select both a sample test, an algorithm, and enter folder capacity.")
-
+    
         # Redirect output to a string buffer
         buffer = io.StringIO()
         sys.stdout = buffer
 
         # Call the selected algorithm function with folder capacity
         folders = algorithms[algorithm_choice](files,folder_capacity)
-
-        filehandler.Output(r"Sample Tests\Sample 1\INPUT\Audios",r"Sample Tests\Sample 1\test output",folders,"worstfit_linearsearch",1)
+        filehandler.Output(folder_location,output_location,folders,algorithm_choice,test_choice)
 
         # Restore standard output
         sys.stdout = sys.__stdout__
@@ -59,3 +69,6 @@ def confirm():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+

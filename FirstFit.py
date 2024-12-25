@@ -1,8 +1,11 @@
-from FileHandling import sortduration
+from FileHandling import *
+
+filehandler = FileHandlingClass()
+
 
 def FirstFit(tracks, DDPF):
     # Sorting the tracks by duration in descending order using Timsort
-    sortedtracks = sortduration(tracks)                                                             # O(N log N), Timsort complexity for sorting dictionary items,where N is the number of items in `tracks`
+    sortedtracks = filehandler.sortduration(tracks)                                                             # O(N log N), Timsort complexity for sorting dictionary items,where N is the number of items in `tracks`
 
     Folders = []                                                                                    # O(1), 
     FoldersSize = []                                                                                # O(1), 
