@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 import io
 import sys
-from worstfit import *
+from WorstFit import *
+
 
 app = Flask(__name__)
 
