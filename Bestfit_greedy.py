@@ -6,10 +6,10 @@ def best_fit_with_priority_queue(file_sizes, folder_capacity):                  
 
     folders = []                                                                     #O(1)
 
-    for file_name, size in sorted_files:                                             #for loop indexing ->O(n)  ,the total complexity -> O(n * (m  + k)) ,Simplification: O(n * m) .
+    for file_name, size in sorted_files:                                             #for loop indexing ->O(n)  , the total complexity -> O(n * (m  + k)) ,Simplification: O(n * m) .
         # Skip if file is larger than folder capacity
         if size > folder_capacity:                                                   #O(1)
-            raise ValueError(f"File '{file_name}' with size {size} exceeds folder capacity {folder_capacity}.") #raise ValueError() ->O(1)
+            raise ValueError(f"File '{file_name}' with size {size} exceeds folder capacity {folder_capacity}.") # raise ValueError() ->O(1)
         # Find the best folder for the current file
         best_fit_index = -1                                                          #O(1)
         min_remaining_space = float('inf')                                           #O(1)

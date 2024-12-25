@@ -17,8 +17,8 @@ def best_fit_dp(file_sizes, folder_capacity):                  # Total time comp
                     dp[i][cap] = True             # O(1) - Marking this capacity as achievable
 
     # Backtracking 
-    folders = []                                  # O(1) - Initialize list for storing folders
-    remaining_files = set(range(n))               # O(n) - Initialize set of all files
+    folders = []                                  # O(1) - Initialize list for  storing folders
+    remaining_files = set(range(n))               # O(n) - Initialize set of all  files
 
     while remaining_files:                        # O(n) - Looping until all files are allocated
         cap = folder_capacity                     # O(1) - Reset folder capacity
