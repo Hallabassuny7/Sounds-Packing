@@ -26,7 +26,7 @@ def FirstFit_BinarySearch(class_tracks, folder_size):
     # Extract and return just the folder contents
     return [folder_contents for folder_contents, _ in FoldersWithSizes]
 
-def harmonic_partitioning(files, folder_size):
+def Harmonic_Partitioning(files, folder_size):
     partitions = {
         "large": [],
         "medium": [],
@@ -90,7 +90,7 @@ def readfile(folderdir):
 
 files=readfile(r"Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
 #print(files)
-x=harmonic_partitioning(files,100)
+x=Harmonic_Partitioning(files,100)
 print(x)
 
 
@@ -112,6 +112,6 @@ Folder 3: [('4.mp3', 15)], [('5.mp3', 15)], [('3.mp3', 20)]
 ]
 """
 
-folders = harmonic_partitioning(files, 100)
+folders = Harmonic_Partitioning(files, 100)
 for idx, folder in enumerate(folders, start=1):
     print(f"Folder {idx}: {folder}")

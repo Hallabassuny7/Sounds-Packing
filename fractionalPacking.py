@@ -1,7 +1,8 @@
 import os
 import concurrent.futures
-from FileHandling import FileHandlingClass
+from FileHandling import *
 
+filehandler = FileHandlingClass()
 
 def process_sound(name, duration_to_process): #complexity: O(1)
     """Mock process a sound file and print what would be done."""
@@ -65,42 +66,3 @@ def fractional_packing(tracks, total_duration_available): #complexity: O(nlogn) 
 
 #total complexity: o(nlogn) + o(k*n) + o(n)= o(nlogn) + o(k*n) 
 #worst case: number of files= number of folders, complexity= o(nlogn) + o(n^2)= o(n^2)
-
-# Test case execution logic
-if __name__ == "__main__":
-    folder_capacity = 100
-    packed_folders = None
-
-fileHandling=FileHandlingClass()    
-
-if fileHandling.working_on_testcase == 1:
-        source = r"./Sample Tests/Sample 1/INPUT/Audios"
-        tracks_dict = fileHandling.t1  # Access t1 from complete_scenario
-elif fileHandling.working_on_testcase == 2:
-        source = r"./Sample Tests/Sample 2/INPUT/Audios"
-        tracks_dict = fileHandling.t2  # Access t2 from complete_scenario
-elif fileHandling.working_on_testcase == 3:
-        source = r"./Sample Tests/Sample 3/INPUT/Audios"
-        tracks_dict = fileHandling.t3  # Access t3 from complete_scenario
-elif fileHandling.working_on_testcase == 4:
-        source = r"./Complete Tests/Complete1/Audios"
-        tracks_dict = fileHandling.t4  # Access t4 from complete_scenario
-elif fileHandling.working_on_testcase == 5:
-        source = r"./Complete Tests/Complete2/Audios"
-        tracks_dict = fileHandling.t5  # Access t5 from complete_scenario    
-
-    # Ensure the directory contains the expected audio files
-try:
-        audio_files = os.listdir(source)
-except FileNotFoundError:
-        print(f"Directory not found: {source}")
-        exit(1)
-
-    # Process each audio file
-if tracks_dict:  # Only process if tracks_dict is not None
-        packed_folders = fractional_packing(tracks_dict, folder_capacity)
-
-    # Print the results
-if packed_folders:  # Only print if packed_folders has been assigned
-        for i, folder in enumerate(packed_folders):
-            print(f"Folder {i + 1}: {folder}")

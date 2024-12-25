@@ -4,8 +4,10 @@ from traceback import print_tb
 import heapq
 from FileHandling import *
 
+filehandler = FileHandlingClass()
+
 #Overall complexity for the function is O(N*M) + O(M) = O(N*M)
-def worstfit_linearsearch(files,folder_size):         # O(1): Function definition
+def WorstFit_LinearSearch(files,folder_size):         # O(1): Function definition
     folders=[]                                        # O(1): Initialize an empty list for folders
     outputlist=[]                                     # O(1): Initialize an empty list to store output
     #Overall complexity for the outer loop is N*M so it is O(N*M)
@@ -34,7 +36,7 @@ def worstfit_linearsearch(files,folder_size):         # O(1): Function definitio
     return outputlist                   # O(1): Return the final output lis
 
 #Overall complexity of the function = O(N log M) +  O(M*log M) = O(N log M) -->Because N log M is much larger relative to M log M.
-def worstfit_PriorityQueue(files,folder_size):          # O(1): Function definition
+def WorstFit_PriorityQueue(files,folder_size):          # O(1): Function definition
     folders=[]                                          # O(1): Initialize an empty list to represent the priority queue
     outputlist=[]                                       # O(1): Initialize an empty list for the output
     #Overall complexity for this loop = N * 3*log M = O(N log M)
@@ -59,10 +61,10 @@ def worstfit_PriorityQueue(files,folder_size):          # O(1): Function definit
     return outputlist                             
 
 #Overall complexity for this function = O(max(NlogN , N*M)) + O(M) which we can ignore because it is very small = O(max(NlogN , N*M))
-def worstfit_linearsearch_Sorted(files,folder_size):            # O(1): Function definition
+def WorstFit_LinearSearch_Decreasing(files,folder_size):            # O(1): Function definition
     folders=[]                                                  # O(1): Initialize an empty list for folders
     outputlist=[]                                               # O(1): Initialize an empty list for output
-    sorted_files=sortduration(files)                            # O(N log N): Sort files in descending order by duration where N = number of audio files
+    sorted_files=filehandler.sortduration(files)                            # O(N log N): Sort files in descending order by duration where N = number of audio files
 #Overall comlexity for this outer loop = N * M = O(N*M)
     for fileName,fileDuration in sorted_files.items():          # O(N): Loop through sorted files 
         if len(folders)==0:                                     # O(1): Check if folders list is empty
@@ -89,7 +91,7 @@ def worstfit_linearsearch_Sorted(files,folder_size):            # O(1): Function
     return outputlist                                  # O(1): Return the final output list
 
 #Overall complexity of this function = O(N log M) + O(M log M) +  O(N log N) = O(N log N) beacuse it is much greater relative to the others. 
-def worstfit_PriorityQueue_Sorted(files,folder_size):       # O(1): Function definition
+def WorstFit_PriorityQueue_Decreasing(files,folder_size):       # O(1): Function definition
     folders=[]                                              # O(1): Initialize an empty priority queue
     outputlist=[]                                           # O(1): Initialize an empty list for output
     sorted_files=sortduration(files)                        # O(N log N): Sort files by duration  where N = number of audio files
@@ -115,12 +117,12 @@ def worstfit_PriorityQueue_Sorted(files,folder_size):       # O(1): Function def
     return outputlist                   # O(1): Return final output
 
 
-files=readfile(r"Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
-print(files)
-x=worstfit_linearsearch_Sorted(files,100)
+#files=readfile(r"Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
+#print(files)
+#x=WorstFit_LinearSearch_Decreasing(files,100)
 # print(x)
 ##Output(r"Sample Tests\Sample 1\INPUT\Audios",r"Sample Tests\Sample 1\test output",x,"worstfit_linearsearch")
 
-folders = worstfit_linearsearch_Sorted(files, 100)
-for idx, folder in enumerate(folders, start=1):
-    print(f"Folder {idx}: {folder}")
+# folders = WorstFit_LinearSearch_Decreasing(files, 100)
+# for idx, folder in enumerate(folders, start=1):
+#     print(f"Folder {idx}: {folder}")

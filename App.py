@@ -2,48 +2,44 @@ from flask import Flask, render_template, request, redirect, url_for
 import io
 import sys
 from WorstFit import *
-
+from HarmonicPartitioning import Harmonic_Partitioning
+from FileHandling import *
+from FolderFilling import *
+from fractionalPacking import *
 
 app = Flask(__name__)
-
-# Algorithm functions
-def algorithm_a():
-    print("Algorithm A is running...")
-    print("This is the output from Algorithm A.")
-    return "Algorithm A has completed successfully."
-
-def algorithm_b():
-    print("Algorithm B starts now.")
-    print("Processing data with Algorithm B...")
-    return "Algorithm B has completed its execution."
-
-def algorithm_c():
-    print("Executing Algorithm C.")
-    print("Algorithm C is designed for advanced data analysis.")
-    return "Algorithm C execution finished."
+filehandler = FileHandlingClass()
 
 # Map algorithms to functions
 algorithms = {
-    'A': algorithm_a,
-    'B': algorithm_b,
-    'C': algorithm_c
+    'Worst Fit Linear Search': WorstFit_LinearSearch,
+    'Worst Fit Linear Search Decreasing': WorstFit_LinearSearch_Decreasing,
+    'Worst Fit Priority Queue': WorstFit_PriorityQueue,
+    'Worst Fit Priority Queue Decreasing':WorstFit_PriorityQueue_Decreasing,
+    'Harmonic Partitioning':Harmonic_Partitioning,
+    'Folder Filling':folder_filling,
+    'Fractional Packing':fractional_packing
 }
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         test_choice = request.form.get('test_choice')
+        files = filehandler.readfile(r"Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
         algorithm_choice = request.form.get('algorithm_choice')
+        folder_capacity = request.form.get('folder_capacity', type=int)
 
-        if not test_choice or not algorithm_choice:
-            return render_template('index.html', error="Please make sure to select both a sample test and an algorithm.")
+        if not test_choice or not algorithm_choice or folder_capacity is None:
+            return render_template('index.html', error="Please make sure to select both a sample test, an algorithm, and enter folder capacity.")
 
         # Redirect output to a string buffer
         buffer = io.StringIO()
         sys.stdout = buffer
 
-        # Call the selected algorithm function
-        result = algorithms[algorithm_choice]()
+        # Call the selected algorithm function with folder capacity
+        folders = algorithms[algorithm_choice](files,folder_capacity)
+
+        filehandler.Output(r"Sample Tests\Sample 1\INPUT\Audios",r"Sample Tests\Sample 1\test output",folders,"worstfit_linearsearch",1)
 
         # Restore standard output
         sys.stdout = sys.__stdout__
@@ -51,7 +47,7 @@ def index():
         # Get the buffered output
         output = buffer.getvalue()
 
-        return render_template('confirm.html', test_choice=test_choice, algorithm_choice=algorithm_choice, output=output, result=result)
+        return render_template('confirm.html', test_choice=test_choice, algorithm_choice=algorithm_choice, folder_capacity=folder_capacity, output=output, result=folders)
     return render_template('index.html')
 
 @app.route('/confirm', methods=['POST'])
