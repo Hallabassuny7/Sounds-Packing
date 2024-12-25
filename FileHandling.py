@@ -66,12 +66,12 @@ def Output(src,dest,data1,funcname):
                 print("Error occurred while copying file.")
 
 workingOn_testcase = int(input("Enter Test case no. you would like to run: "))
-readfile(r"..\testcases\Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
-print(file_data)
+#readfile(r"..\testcases\Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
+#print(file_data)
 
 if workingOn_testcase==1:
-    source = r"..\testcases\Sample Tests\Sample 1\INPUT\Audios"
+    source = r"..\Sample Tests\Sample 1\INPUT\Audios"
 elif workingOn_testcase==2:
-    source = r"..\testcases\Sample Tests\Sample 1\INPUT\Audios"
+    source = r"..\Sample Tests\Sample 2\INPUT\Audio"
 else:
-    source = r"..\testcases\Sample Tests\Sample 3\INPUT\Audios"
+    source = r".. \Sample Tests\Sample 3\INPUT\Audios"
