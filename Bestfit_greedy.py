@@ -4,9 +4,9 @@ def best_fit_with_priority_queue(file_sizes, folder_capacity):                  
     # Sort files by size in descending order
     sorted_files = sorted(file_sizes.items(), key=lambda item: item[1], reverse=True)# item()-> O(1) ,sorted()->O(nlogn)"timsort" , total complexity->O(nlogn)
 
-    folders = []                                                                     #O(1)
+    folders = []                                                                     # O(1)
 
-    for file_name, size in sorted_files:                                             #for loop indexing ->O(n)  , the total complexity -> O(n * (m  + k)) ,Simplification: O(n * m) .
+    for file_name, size in sorted_files:                                             # for loop indexing ->O(n)  , the total complexity -> O(n * (m  + k)) ,Simplification: O(n * m) .
         # Skip if file is larger than folder capacity
         if size > folder_capacity:                                                   #O(1)
             raise ValueError(f"File '{file_name}' with size {size} exceeds folder capacity {folder_capacity}.") # raise ValueError() ->O(1)

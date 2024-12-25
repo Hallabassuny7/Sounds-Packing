@@ -75,4 +75,4 @@ result = best_fit_dp(file_sizes, folder_capacity)
 
 # Output the result
 for idx, (used_capacity, folder_content) in enumerate(result):
-    print(f"Folder {idx + 1}: Used Capacity = {used_capacity}, Files = {folder_content}")
+     print(f"Folder {idx + 1}: Used Capacity = {used_capacity}, Files = {folder_content}")
