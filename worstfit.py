@@ -2,6 +2,8 @@ import os
 import shutil
 from traceback import print_tb
 import heapq
+from FileHandling import *
+
 #Overall complexity for the function is O(N*M) + O(M) = O(N*M)
 def worstfit_linearsearch(files,folder_size):         # O(1): Function definition
     folders=[]                                        # O(1): Initialize an empty list for folders
@@ -31,7 +33,7 @@ def worstfit_linearsearch(files,folder_size):         # O(1): Function definitio
         
     return outputlist                   # O(1): Return the final output lis
 
-#overall complexity of the function = O(N log M) +  O(M*log M) = O(N log M) -->Because N log M is much larger relative to M log M.
+#Overall complexity of the function = O(N log M) +  O(M*log M) = O(N log M) -->Because N log M is much larger relative to M log M.
 def worstfit_PriorityQueue(files,folder_size):          # O(1): Function definition
     folders=[]                                          # O(1): Initialize an empty list to represent the priority queue
     outputlist=[]                                       # O(1): Initialize an empty list for the output
@@ -56,11 +58,6 @@ def worstfit_PriorityQueue(files,folder_size):          # O(1): Function definit
 
     return outputlist                             
 
-def sortduration(audio):
-    sorted_items = sorted(audio.items(), key=lambda item: item[1], reverse=True)
-    sorted_Aura = dict(sorted_items)
-
-    return sorted_Aura
 #Overall complexity for this function = O(max(NlogN , N*M)) + O(M) which we can ignore because it is very small = O(max(NlogN , N*M))
 def worstfit_linearsearch_Sorted(files,folder_size):            # O(1): Function definition
     folders=[]                                                  # O(1): Initialize an empty list for folders
@@ -90,6 +87,7 @@ def worstfit_linearsearch_Sorted(files,folder_size):            # O(1): Function
         outputlist.append(folder[1])                   # O(1): Append folder content to output
 
     return outputlist                                  # O(1): Return the final output list
+
 #Overall complexity of this function = O(N log M) + O(M log M) +  O(N log N) = O(N log N) beacuse it is much greater relative to the others. 
 def worstfit_PriorityQueue_Sorted(files,folder_size):       # O(1): Function definition
     folders=[]                                              # O(1): Initialize an empty priority queue
@@ -115,68 +113,6 @@ def worstfit_PriorityQueue_Sorted(files,folder_size):       # O(1): Function def
         outputlist.append(folder[1])   # O(1): Add folder content
 
     return outputlist                   # O(1): Return final output
-
-
-def convert_to_seconds(time_str):
-    hours, minutes, seconds = time_str.split(':')
-    return int(hours) * 3600 + int(minutes) * 60 + int(seconds)
-
-def readfile(folderdir):
-    file_data = {}
-    target_path = os.path.abspath(folderdir)
-    with open(target_path, 'r') as file:
-        num_entries = int(file.readline().strip())
-
-        for i in range(num_entries):
-            line = file.readline().strip()
-
-            filename, time_str = line.split()
-
-            # key = int(filename.split('.')[0])
-            key = filename
-
-            value = convert_to_seconds(time_str)
-
-            file_data[key] = value
-
-    return file_data
-
-
-def Output(src,dest,data1,funcname):
-    outputdir =os.path.join(os.path.abspath(dest), rf"OUTPUT\Sample{1}")
-    os.makedirs(outputdir, exist_ok=True)
-    AbsPath = os.path.join(outputdir, funcname)
-    os.makedirs(AbsPath, exist_ok=True)
-    it = 1
-    for i in data1:
-        currentfolder = os.path.join(AbsPath, f"F{it}")
-        os.makedirs(currentfolder,exist_ok=True)
-        it+=1
-        for j in i:
-            #print(j[1])
-            sourcefile = os.path.join(os.path.abspath(src), j[0])
-            destfile = os.path.join(currentfolder, j[0])
-            #print(sourcefile)
-            #print(destfile)
-            try:
-                shutil.copyfile(sourcefile, destfile)
-                #print("File copied successfully.")
-
-            # If source and destination are same
-            except shutil.SameFileError:
-                print("Source and destination represents the same file.")
-
-            # If destination is a directory.
-            except IsADirectoryError:
-                print("Destination is a directory.")
-
-            # If there is any permission issue
-            except PermissionError:
-                print("Permission denied.")
-
-            # For other errors
-            except:
-                print("Error occurred while copying file.")
 
 
 

@@ -14,37 +14,38 @@ def seconds_to_hms(seconds):
 
 
 def readfile(folderdir):
-    file_data = []
+    file_data = {}
     target_path = os.path.abspath(folderdir)
     with open(target_path, 'r') as file:
         num_entries = int(file.readline().strip())
 
-        for _ in range(num_entries):
+        for i in range(num_entries):
             line = file.readline().strip()
 
             filename, time_str = line.split()
 
+            key = filename
+
             value = hms_to_seconds(time_str)
-            
-            file_data.append((filename, value))  # Append as a tuple
+
+            file_data[key] = value
 
     return file_data
 
-
 def sortduration(audio):
-    # Using the sorted function to sort the list of tuples based on the second element of each tuple.
-    # - sorted() uses Timsort, which has a complexity of O(N log N), where N is the length of the input list.
-    # - The key parameter uses a lambda function to extract the second element (item[1]) from each tuple.
-    #   - The lambda function is called once for each element in the list, contributing O(N) to the overall complexity.
-    # - Combining both operations, the complexity of this line is O(N log N).
+    # Sorting the items of the dictionary by their values in descending order using Timsort
+    sorted_items = sorted(audio.items(), key=lambda item: item[1], reverse=True)
+    # O(N log N), where N is the number of items in the audio dictionary.
+    # - audio.items() creates a view of the dictionary items → O(N).
+    # - sorted() sorts the items using Timsort → O(N log N).
+    # - The lambda function extracts the value (item[1]) for sorting → O(1) per call, called N times.
 
-    sorted_items = sorted(audio, key=lambda item: item[1], reverse=True)
+    # Converting the sorted list of tuples back into a dictionary
+    sorted_Aura = dict(sorted_items)
+    # O(N), where N is the number of items in the list sorted_items.
+    # - dict() iterates over the list and constructs a new dictionary.
 
-    # Returning the sorted list of tuples.
-    # - This operation has a complexity of O(1) as it simply returns the reference to the sorted list.
-
-    return sorted_items
-
+    return sorted_Aura  # O(1), returning the sorted dictionary.
 
 def Output(src,dest,folder,funcname,sample):
     #path
@@ -63,13 +64,10 @@ def Output(src,dest,folder,funcname,sample):
         with open(os.path.join(outputdir,f"F{it}_METADATA.txt"), "w") as file:
             file.write(f"F{it}\n")
         # //////////////////////////////////////////////////////////////////////////////
-        # Display
-        print (f"F{it}:")
         timesum = 0
         for j in i:
             sourcefile = os.path.join(os.path.abspath(src), j[0])
             destfile = os.path.join(currentfolder, j[0])
-            print (f"\t{j[0]}")
             #txt file
             #convert sec to time format
             time = seconds_to_hms(j[1])
@@ -101,4 +99,9 @@ def Output(src,dest,folder,funcname,sample):
         with open(os.path.join(outputdir,f"F{it}_METADATA.txt"), "a") as file:
             file.write(f"{seconds_to_hms(timesum)}\n")
         # //////////////////////////////////////////////////////////////////////////////
+        with open(os.path.join(outputdir, f"F{it}_METADATA.txt"), "r") as file:
+            # Read the file's content
+            content = file.read()
+            # Print the file's content
+            print(content)
         it+=1
