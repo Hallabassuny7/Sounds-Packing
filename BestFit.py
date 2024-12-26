@@ -124,16 +124,3 @@ def best_fit_dp(file_sizes, folder_capacity):                  # Total time comp
 # - DP table: O(n * C)
 # - Folders and file sets: O(n)
 # Total space complexity: O(n * C)
-
- # Test case:
-file_sizes = {
-    "file1": 10,
-    "file2": 15,
-    "file3": 20,
-    "file4": 5,
-    "file5": 25,
-    "file6": 10
-}
-folder_capacity = 30
-result = best_fit_with_priority_queue(file_sizes, folder_capacity)
-print(result)

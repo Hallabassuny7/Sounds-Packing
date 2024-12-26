@@ -18,7 +18,6 @@ def look_ahead(folders, sound, folder_capacity):  #complexity: O(k)
 def pack(sounds: dict[str, int], folder_capacity: int) -> list[list[tuple[str, int]]]:
     folders = []  # Complexity: O(1)
     sorted_items = sorted(sounds.items(), key=lambda item: item[1], reverse=True)  # Complexity: O(nlogn)
-    print(sorted_items)  # Complexity: O(1)
 
     
     for sound in sorted_items: # Complexity: O(n*k) where n is the total number of sounds
@@ -67,10 +66,3 @@ if __name__ == "__main__":
     # Process the audio metadata
     if tracks_dict:
         packed_folders = pack(tracks_dict, folder_capacity)
-
-    # Print the results
-    if packed_folders:
-        for i, folder in enumerate(packed_folders):
-            print(f"Folder {i + 1}: {folder}")
-
-

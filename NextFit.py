@@ -13,10 +13,6 @@ def next_fit_D_C(file_sizes, folder_capacity):  # Main function to allocate file
         left_files = file_list[:mid]  # Left half of the file list. O(n)
         right_files = file_list[mid:]  # Right half of the file list. O(n)
         
-        print("Files before allocation (after divide and conquer):")
-        print("Left files:", left_files)
-        print("Right files:", right_files)
-        print()
 
         # Conquer: Recursively allocate files in the left and right halves.
         left_folders = allocate_files(left_files)  # Recursive call for left half. O(log n)
@@ -80,15 +76,6 @@ def next_fit_D_C(file_sizes, folder_capacity):  # Main function to allocate file
 # - Space used by the `folders` list: O(n) (for storing the allocated folders).
 # - Space used by the min-heap `folders_heap`: O(n) (for managing the folder capacities).
 # Total space complexity: O(n)
-
-# Example
-size_tst = {"file1": 70, "file2": 80, "file3": 20, "file4": 15, "file5": 15}  # Example file sizes.
-capacity_tst = 100  # Example folder capacity.
-
-allocated_folders = next_fit_D_C(size_tst, capacity_tst)  # Call the function with the test data.
-
-print("Final folders:", allocated_folders)  # Print the final allocation of files into folders.
-
 
 ################################################################################################################################################################
 

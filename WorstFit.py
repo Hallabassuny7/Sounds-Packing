@@ -94,7 +94,7 @@ def WorstFit_LinearSearch_Decreasing(files,folder_size):            # O(1): Func
 def WorstFit_PriorityQueue_Decreasing(files,folder_size):       # O(1): Function definition
     folders=[]                                              # O(1): Initialize an empty priority queue
     outputlist=[]                                           # O(1): Initialize an empty list for output
-    sorted_files=sortduration(files)                        # O(N log N): Sort files by duration  where N = number of audio files
+    sorted_files=filehandler.sortduration(files)                        # O(N log N): Sort files by duration  where N = number of audio files
     #Overall complexity of this loop = N * 4 log M = O(N log M)
     for fileName,fileDuration in sorted_files.items():      # O(N): Iterate through sorted files
         if len(folders)==0:                                 # O(1): Check if priority queue is empty
@@ -116,13 +116,3 @@ def WorstFit_PriorityQueue_Decreasing(files,folder_size):       # O(1): Function
 
     return outputlist                   # O(1): Return final output
 
-
-#files=readfile(r"Sample Tests\Sample 1\INPUT\AudiosInfo.txt")
-#print(files)
-#x=WorstFit_LinearSearch_Decreasing(files,100)
-# print(x)
-##Output(r"Sample Tests\Sample 1\INPUT\Audios",r"Sample Tests\Sample 1\test output",x,"worstfit_linearsearch")
-
-# folders = WorstFit_LinearSearch_Decreasing(files, 100)
-# for idx, folder in enumerate(folders, start=1):
-#     print(f"Folder {idx}: {folder}")

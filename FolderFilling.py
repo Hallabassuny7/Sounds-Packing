@@ -56,13 +56,6 @@ def folder_filling(files, folder_capacity):
     #if k > 1 this means that n is reduced faster. So, when k = 1 the time complexity is upper bounded by O(n)
 
     # Total Time complexity of while loop : (O(n*D) + O(n))*O(n) = O(n^2 * D) + O(n^2) = O(n^2 * D)
-    
-# Example usage
-files = {
-    "mp3-1": 70, "mp3-2": 80, "mp3-3": 15, "mp3-4": 20, "mp3-5": 15
-}
-folder_capacity = 100
-print(folder_filling(files, folder_capacity))
 
 # Time complexity of dp function without memoization: T(n) = 2T(n-1) + O(1)   -> O(2^n)
 # Time complexity of dp function with memoization:    O(n*D)

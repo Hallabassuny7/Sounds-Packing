@@ -6,12 +6,10 @@ filehandler = FileHandlingClass()
 
 def process_sound(name, duration_to_process): #complexity: O(1)
     """Mock process a sound file and print what would be done."""
-    print(f"Processing {name} for {duration_to_process} seconds.") #complexity: O(1)
 
 def fractional_packing(tracks, total_duration_available): #complexity: O(nlogn) + O(n) + O(k*n)
 
     sortedtracks = sorted(tracks.items(), key=lambda item: item[1], reverse=True) #complexity: O(nlogn)
-    print(sortedtracks) #complexity: O(n)
     # List to store packed folders
     folders = []  #complexity: O(1)
     # Tracks in the current folder
@@ -61,7 +59,6 @@ def fractional_packing(tracks, total_duration_available): #complexity: O(nlogn) 
         for future in concurrent.futures.as_completed(futures): #complexity: O(n)
             future.result() #complexity: O(1)
 
-    print("All tasks completed.") #complexity: O(1)
     return folders #complexity: O(1)
 
 #total complexity: o(nlogn) + o(k*n) + o(n)= o(nlogn) + o(k*n) 
