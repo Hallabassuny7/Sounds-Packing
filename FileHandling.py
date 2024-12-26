@@ -92,25 +92,25 @@ class FileHandlingClass:
                     file.write(f"{j[0]} {time}\n")
                 timesum += j[1]
 
-                try:
-                    shutil.copyfile(sourcefile, destfile)
-                    # print("File copied successfully.")
-
-                # If source and destination are same
-                except shutil.SameFileError:
-                    print("Source and destination represents the same file.")
-
-                # If destination is a directory.
-                except IsADirectoryError:
-                    print("Destination is a directory.")
-
-                # If there is any permission issue
-                except PermissionError:
-                    print("Permission denied.")
-
-                # For other errors
-                except:
-                    print("Error occurred while copying file.")
+                # try:
+                #     shutil.copyfile(sourcefile, destfile)
+                #     # print("File copied successfully.")
+                #
+                # # If source and destination are same
+                # except shutil.SameFileError:
+                #     print("Source and destination represents the same file.")
+                #
+                # # If destination is a directory.
+                # except IsADirectoryError:
+                #     print("Destination is a directory.")
+                #
+                # # If there is any permission issue
+                # except PermissionError:
+                #     print("Permission denied.")
+                #
+                # # For other errors
+                # except:
+                #     print("Error occurred while copying file.")
             # write to text file
             with open(os.path.join(outputdir, f"F{it}_METADATA.txt"), "a") as file:
                 file.write(f"{FileHandlingClass.seconds_to_hms(timesum)}\n")

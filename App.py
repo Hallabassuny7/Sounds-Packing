@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import io
 import sys
 from WorstFit import *
-from HarmonicPartitioning import Harmonic_Partitioning
+from HarmonicPartitioning import harmonic_partitioning
 from FileHandling import *
 from FolderFilling import *
 from fractionalPacking import *
@@ -10,7 +10,7 @@ from pack import *
 from BestFit import *
 from NextFit import *
 from FirstFit import *
-
+import time
 app = Flask(__name__)
 filehandler = FileHandlingClass()
 
@@ -20,7 +20,7 @@ algorithms = {
     'Worst Fit Linear Search Decreasing': WorstFit_LinearSearch_Decreasing,
     'Worst Fit Priority Queue': WorstFit_PriorityQueue,
     'Worst Fit Priority Queue Decreasing':WorstFit_PriorityQueue_Decreasing,
-    'Harmonic Partitioning':Harmonic_Partitioning,
+    'Harmonic Partitioning':harmonic_partitioning,
     'Folder Filling':folder_filling,
     'Fractional Packing':fractional_packing,
     'Pack':pack,
@@ -47,9 +47,15 @@ def index():
         buffer = io.StringIO()
         sys.stdout = buffer
 
+        start_time = time.time()
+
         # Call the selected algorithm function with folder capacity
         folders = algorithms[algorithm_choice](files,folder_capacity)
         filehandler.Output(folder_location,output_location,folders,algorithm_choice,test_choice)
+
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(f"Execution time: {execution_time} seconds")
 
         # Restore standard output
         sys.stdout = sys.__stdout__
