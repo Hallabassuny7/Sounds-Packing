@@ -26,7 +26,7 @@ def FirstFit_BinarySearch(class_tracks, folder_size):  # O(1): Function definiti
     return [folder_contents for folder_contents, _ in FoldersWithSizes]  # O(M): Extract folder contents
 
 # Overall complexity = O(N + (K log K) + P * M) ≈ O(N log N + N * M)
-def harmonic_partitioning(files, folder_size):  # O(1): Function definition
+def Harmonic_Partitioning(files, folder_size):  # O(1): Function definition
     partitions = {  # O(1): Initialize partitions dictionary
         "large": [],
         "medium": [],
