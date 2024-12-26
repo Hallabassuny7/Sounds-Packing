@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import io
 import sys
 from WorstFit import *
-from HarmonicPartitioning import harmonic_partitioning
+from HarmonicPartitioning import Harmonic_Partitioning
 from FileHandling import *
 from FolderFilling import *
 from fractionalPacking import *
@@ -20,7 +20,7 @@ algorithms = {
     'Worst Fit Linear Search Decreasing': WorstFit_LinearSearch_Decreasing,
     'Worst Fit Priority Queue': WorstFit_PriorityQueue,
     'Worst Fit Priority Queue Decreasing':WorstFit_PriorityQueue_Decreasing,
-    'Harmonic Partitioning':harmonic_partitioning,
+    'Harmonic Partitioning':Harmonic_Partitioning,
     'Folder Filling':folder_filling,
     'Fractional Packing':fractional_packing,
     'Pack':pack,
